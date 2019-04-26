@@ -14,10 +14,12 @@ Go code!
 */
 const express = require('express');
 const projectsRoutes = require('./projects/projectsRoutes.js');
+const actionsRoutes = require('./actions/actionsRoutes.js');
 
 const server = express();
 server.use(express.json());
 
 server.use('/api/projects', projectsRoutes);
+server.use('/api/actions', actionsRoutes);
 
 server.listen(4000, () => console.log('API running on port 4000'));
