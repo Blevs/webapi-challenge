@@ -30,4 +30,17 @@ router.get('/:id', (req, res) => {
     .catch(_err => res.status(500).json({message: "Error getting project information"}));
 });
 
+router.delete('/:id', (req, res) => {
+  const {id} = req.params;
+  projectModel.get(id)
+    .then(project => project
+          ? projectModel.remove(id)
+          .then(removed => removed
+                ? res.status(200).json(project)
+                : (void 0).throwError())
+          .catch(_err => res.status(500).json({message: "Error deleting project"}))
+          : res.status(404).json({message: "Project with give ID does not exist."}))
+    .catch(_err => res.status(500).json({message: "Error getting project information"}));
+});
+
 module.exports = router;
