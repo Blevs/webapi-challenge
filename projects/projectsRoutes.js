@@ -43,4 +43,26 @@ router.delete('/:id', (req, res) => {
     .catch(_err => res.status(500).json({message: "Error getting project information"}));
 });
 
+router.put('/:id', (req, res) => {
+  const {id} = req.params;
+  const newProject = req.body;
+  if (newProject && (newProject.name || newProject.description || newProject.completed)) {
+  projectModel.get(id)
+    .then(oldProject => oldProject
+          ? projectModel.update(id, newProject)
+          .then(updated => updated
+                ? projectModel.get(id)
+                .then(project => res.status(200).json(project))
+                .catch(_err => res.status(500).json({
+                  message: "Project updated, but an error occured while retrieving the project information."
+                }))
+                : (void 0).throwError())
+          .catch(_err => res.status(500).json({message: "Error updating project"}))
+          : res.status(404).json({message: "Project with give ID does not exist."}))
+    .catch(_err => res.status(500).json({message: "Error getting project information"}));
+  } else {
+    res.status(400).json({message: "Provide changes to project"});
+  }
+});
+
 module.exports = router;
