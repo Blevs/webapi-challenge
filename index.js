@@ -13,8 +13,11 @@ I need this code, just don't know where, perhaps should make some middleware, do
 Go code!
 */
 const express = require('express');
+const projectsRoutes = require('./projects/projectsRoutes.js');
 
 const server = express();
 server.use(express.json());
+
+server.use('/api/projects', projectsRoutes);
 
 server.listen(4000, () => console.log('API running on port 4000'));
