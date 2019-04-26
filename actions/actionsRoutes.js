@@ -39,5 +39,16 @@ router.get('/:id', (req, res) => {
     .catch(_err => res.status(500).json({message: "Error getting actions"}));
 });
 
+router.delete('/:id', (req, res) => {
+  const {id} = req.params;
+  actionModel.get(id)
+    .then(action => actionModel.remove(id)
+          .then(removed => removed
+                ? res.status(200).json(action)
+                : (void 0).throwError())
+          .catch(_err => res.status(500).json({message: "Error removing action"})))
+    .catch(_err => res.status(404).json({message: "Action with ID does not exist"}));
+});
+
 
 module.exports = router;
