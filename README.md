@@ -24,15 +24,35 @@ In this challenge, create a web API around the following resources: `Projects` a
 
 Demonstrate your understanding of this Sprint's concepts by answering the following free-form questions. Edit this document to include your answers after each question. Make sure to leave a blank line above and below your answer so it is clear and easy to read by your project manager.
 
-- [ ] Mention two parts of Express that you learned about this week.
+- [x] Mention two parts of Express that you learned about this week.
 
-- [ ] Describe Middleware?
+Tow parts of express I learned this week are routes and middleware.
 
-- [ ] Describe a Resource?
+- [x] Describe Middleware?
 
-- [ ] What can the API return to help clients know if a request was successful?
+Middleware is a function that is executed for each request and response pair
+recieved by the express server. The middleware may modify the pair, check them
+for validity or perform any other number of actions. Ultimately, each piece of
+middleware may either pass execution to the next middleware function, or
+terminate the processing of the middleware stack.
 
-- [ ] How can we partition our application into sub-applications?
+- [x] Describe a Resource?
+
+A resource is similar to an object, but for a restful api. It is a type with
+data, methods and relations to other resources. It is defined by a route, and
+usually has the standard REST verbs of GET, POST, PUT and DELETE.
+
+- [x] What can the API return to help clients know if a request was successful?
+
+An API returns an http status code to specify if the request was successful or
+failed, and in what way.
+
+- [x] How can we partition our application into sub-applications?
+
+Express has the ability to create routers, which are sets of routes and
+resources. These routers can then be assigned to a higher level route, like
+'/users'. This allows us to define routers in seperate files and then combine
+them as we form the express server.
 
 ## Project Setup
 
