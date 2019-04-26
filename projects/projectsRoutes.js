@@ -65,4 +65,15 @@ router.put('/:id', (req, res) => {
   }
 });
 
+router.get('/:id/actions', (req, res) => {
+  const {id} = req.params;
+  projectModel.get(id)
+    .then(project => project
+          ? projectModel.getProjectActions(id)
+          .then(actions => res.status(200).json(actions))
+          .catch(_err => res.status(500).json({message: "Error getting project actions"}))
+          : res.status(404).json({message: "Project with give ID does not exist."}))
+    .catch(_err => res.status(500).json({message: "Error getting project information"}));
+});
+
 module.exports = router;
