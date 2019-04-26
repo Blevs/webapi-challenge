@@ -30,4 +30,14 @@ router.post('/', (req, res) => {
   }
 });
 
+router.get('/:id', (req, res) => {
+  const {id} = req.params;
+  actionModel.get(id)
+    .then(action => action
+          ? res.status(200).json(action)
+          : res.status(404).json({message: "Action with ID does not exist"}))
+    .catch(_err => res.status(500).json({message: "Error getting actions"}));
+});
+
+
 module.exports = router;
